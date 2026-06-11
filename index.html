@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jornada 30 Programas em 30 Dias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #08081A;
+      --bg2: #0D0D20;
+      --bg3: #0F0F22;
+      --border: #1E1E3A;
+      --border2: #2A2A5A;
+      --purple: #7B5FFF;
+      --purple-dark: #6A4FEE;
+      --yellow: #F5C518;
+      --cyan: #00D4FF;
+      --green: #25D366;
+      --red: #FF7B7B;
+      --text: #E8E8F0;
+      --text2: #C8C8E0;
+      --muted: #6666AA;
+      --muted2: #4A4A7A;
+      --muted3: #2E2E5A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 8, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--purple);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo span { color: var(--yellow); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--purple-dark); }
+
+    /* HERO */
+    .hero {
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: var(--purple);
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      background: rgba(123, 95, 255, 0.08);
+      border: 1px solid rgba(123, 95, 255, 0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title .num {
+      color: var(--yellow);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .hero-title .accent { color: var(--cyan); }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-sub strong { color: var(--yellow); font-weight: 500; }
+
+    .counter-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .counter-item { text-align: center; }
+
+    .counter-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--yellow);
+      line-height: 1;
+      display: block;
+    }
+
+    .counter-label {
+      font-size: 11px;
+      color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 6px;
+    }
+
+    .counter-divider {
+      font-size: 2.5rem;
+      color: var(--border2);
+      align-self: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--purple-dark); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text2);
+      border: 1px solid var(--border2);
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--purple); color: var(--text); }
+
+    /* CODE STRIP */
+    .code-strip {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted3);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .code-strip .kw { color: var(--cyan); }
+    .code-strip .str { color: var(--yellow); }
+    .code-strip .num { color: var(--red); }
+    .code-strip .cmt { color: var(--purple); }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--purple);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* CATEGORIES */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .cat-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1rem;
+      text-align: center;
+      cursor: default;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .cat-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-3px);
+    }
+
+    .cat-icon {
+      font-size: 28px;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .cat-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      margin-bottom: 5px;
+    }
+
+    .cat-desc {
+      font-size: 11px;
+      color: var(--muted2);
+      line-height: 1.5;
+    }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--purple);
+      background: rgba(123, 95, 255, 0.08);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 7px 12px;
+      min-width: 44px;
+      text-align: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2rem;
+    }
+
+    .cta-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .cta-box {
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cta-box.form-box {
+      background: #13132A;
+      border: 1px solid var(--border2);
+    }
+
+    .cta-box.wa-box {
+      background: #0D1F18;
+      border: 1px solid #1A3A2A;
+    }
+
+    .cta-box-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .form-box .cta-box-label { color: var(--purple); }
+    .wa-box .cta-box-label { color: var(--green); }
+
+    .cta-box-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .cta-box-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      flex: 1;
+    }
+    .form-box .cta-box-desc { color: var(--muted); }
+    .wa-box .cta-box-desc { color: #3A7A5A; }
+
+    .btn-form {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+    .btn-form:hover { background: var(--purple-dark); }
+
+    .btn-wa {
+      background: var(--green);
+      color: #0A2A15;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+    .btn-wa:hover { background: #1EBE55; }
+
+    /* FOOTER PILLARS */
+    .pillars {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .pillar-icon {
+      font-size: 20px;
+      color: var(--purple);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pillar-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text2);
+      margin-bottom: 4px;
+    }
+
+    .pillar-desc {
+      font-size: 12px;
+      color: var(--muted2);
+      line-height: 1.6;
+    }
+
+    /* BOTTOM BAR */
+    footer {
+      text-align: center;
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted3);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 3rem 1.5rem 2.5rem; }
+      .counter-row { gap: 1.5rem; }
+      .counter-num { font-size: 2.2rem; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .pillars { grid-template-columns: 1fr; gap: 1.5rem; }
+      section { padding: 3.5rem 1.5rem; }
+      .categories { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">&lt;/&gt; jornada<span>30</span></div>
+    <ul class="nav-links">
+      <li><a href="#categorias">Categorias</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#participe">Comunidade</a></li>
+    </ul>
+    <a href="#participe" class="nav-cta">Sugerir desafio</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">A comunidade escolhe. Nós resolvemos juntos.</div>
+    <h1 class="hero-title">
+      Jornada<br>
+      <span class="num">30</span> Programas<br>
+      em <span class="accent">30 Dias</span>
+    </h1>
+    <p class="hero-sub">
+      Você traz o desafio.<br>
+      <strong>Nós encontramos a solução.</strong>
+    </p>
+    <div class="counter-row">
+      <div class="counter-item">
+        <span class="counter-num" id="cnt-dias">30</span>
+        <div class="counter-label">dias</div>
+      </div>
+      <div class="counter-divider">/</div>
+      <div class="counter-item">
+        <span class="counter-num" id="cnt-desafios">30</span>
+        <div class="counter-label">desafios</div>
+      </div>
+      <div class="counter-divider">/</div>
+      <div class="counter-item">
+        <span class="counter-num">∞</span>
+        <div class="counter-label">aprendizado</div>
+      </div>
+    </div>
+    <div class="cta-group">
+      <a href="#participe" class="btn-primary">Sugerir um desafio →</a>
+      <a href="#como-funciona" class="btn-outline">Como funciona?</a>
+    </div>
+  </div>
+
+  <!-- CODE STRIP -->
+  <div class="code-strip">
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; <span class="num">30</span>; i++) { <span class="kw">printf</span>(<span class="str">"Desafio %d resolvido!\n"</span>, i+1); } &nbsp;// <span class="cmt">30 programas · 30 dias · muito aprendizado</span>
+  </div>
+
+  <!-- CATEGORIAS -->
+  <section id="categorias">
+    <p class="section-label">Você pode sugerir</p>
+    <h2 class="section-title">Qualquer tipo de desafio</h2>
+    <p class="section-desc">Algoritmos, jogos, ferramentas, APIs — a comunidade decide o que desenvolvemos juntos.</p>
+    <div class="categories">
+      <div class="cat-card">
+        <span class="cat-icon" style="color:#7B5FFF">⟨/⟩</span>
+        <div class="cat-name">Algoritmos</div>
+        <div class="cat-desc">Estruturas, técnicas e desafios de código</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon" style="color:#F5C518">±</span>
+        <div class="cat-name">Matemática</div>
+        <div class="cat-desc">Desafios numéricos e de cálculo</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon" style="color:#00D4FF">🧠</span>
+        <div class="cat-name">Lógica</div>
+        <div class="cat-desc">Raciocínio e pensamento computacional</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon" style="color:#FF7B7B">💻</span>
+        <div class="cat-name">Programas</div>
+        <div class="cat-desc">Aplicações e sistemas completos</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon" style="color:#7BFF9A">🔧</span>
+        <div class="cat-name">Ferramentas</div>
+        <div class="cat-desc">Soluções que facilitam o dia a dia</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon" style="color:#FFB07B">API</span>
+        <div class="cat-name">APIs</div>
+        <div class="cat-desc">Integrações e serviços para devs</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon" style="color:#C47BFF">🎮</span>
+        <div class="cat-name">Jogos</div>
+        <div class="cat-desc">2D, lógicos, educativos e muito mais</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona">
+    <p class="section-label">Como funciona</p>
+    <h2 class="section-title">4 passos simples</h2>
+    <p class="section-desc">Da sua ideia ao código funcionando, tudo feito em comunidade.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Envie suas ideias</div>
+          <div class="step-desc">Preencha o formulário com suas sugestões de desafio. Qualquer nível, qualquer linguagem — todas as ideias são bem-vindas.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">A comunidade escolhe</div>
+          <div class="step-desc">As melhores ideias são votadas e selecionadas pelos membros do grupo no WhatsApp.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Desenvolvemos juntos</div>
+          <div class="step-desc">Durante 30 dias, cada desafio escolhido vira um programa real, desenvolvido e discutido ao vivo com a comunidade.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Aprendemos e evoluímos</div>
+          <div class="step-desc">Cada solução é explicada passo a passo e todo o código é compartilhado abertamente para todo o grupo.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA / PARTICIPE -->
+  <div class="cta-section" id="participe">
+    <div class="cta-inner">
+      <div class="cta-box form-box">
+        <div class="cta-box-label">📋 Participe agora</div>
+        <div class="cta-box-title">Sua ideia pode ser um dos 30 desafios oficiais</div>
+        <div class="cta-box-desc">Preencha o formulário e envie suas sugestões. Iniciantes, estudantes e profissionais são todos muito bem-vindos.</div>
+        <!-- SUBSTITUA o href abaixo pelo link real do formulário -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf5SCLizfXWcQfvapOCm1Z7-lr9u6FmH3KWAS2W8af1fERqLw/viewform" class="btn-form">Acessar formulário →</a>
+      </div>
+      <div class="cta-box wa-box">
+        <div class="cta-box-label">💬 Entre na comunidade</div>
+        <div class="cta-box-title">Acompanhe, discuta e vote nos desafios</div>
+        <div class="cta-box-desc">Fique por dentro de tudo, participe das discussões e ajude a escolher o próximo desafio no grupo do WhatsApp.</div>
+        <!-- SUBSTITUA o href abaixo pelo link real do grupo -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf5SCLizfXWcQfvapOCm1Z7-lr9u6FmH3KWAS2W8af1fERqLw/viewform" class="btn-wa">Entrar no grupo →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILARES -->
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">📊</div>
+      <div>
+        <div class="pillar-title">Para todos os níveis</div>
+        <div class="pillar-desc">Iniciantes, estudantes e profissionais são muito bem-vindos.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">💡</div>
+      <div>
+        <div class="pillar-title">Conhecimento na prática</div>
+        <div class="pillar-desc">Código, lógica e criatividade todos os dias.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">👥</div>
+      <div>
+        <div class="pillar-title">Juntos somos mais fortes</div>
+        <div class="pillar-desc">Compartilhe, aprenda e inspire outros devs.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    // jornada_30_programas &nbsp;·&nbsp; 30 desafios &nbsp;·&nbsp; 30 dias &nbsp;·&nbsp; muito aprendizado
+  </footer>
+
+  <script>
+    // Animação dos contadores ao entrar na viewport
+    function animateCounter(el, target, duration) {
+      let start = 0;
+      const step = target / (duration / 16);
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { el.textContent = target; clearInterval(timer); return; }
+        el.textContent = Math.floor(start);
+      }, 16);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter(document.getElementById('cnt-dias'), 30, 1200);
+          animateCounter(document.getElementById('cnt-desafios'), 30, 1400);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(document.querySelector('.counter-row'));
+
+    // Scroll suave para links internos
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+
+</body>
+</html>
